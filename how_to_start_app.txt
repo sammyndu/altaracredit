@@ -1,0 +1,18 @@
+using command prompt enter the directory where th work has been downloaded (for example: cd/path/to/directory).
+
+Once inside the directory, type newproject\Scripts\activate.bat to activate the virtual environment used in
+creating the application
+
+for mac or linux users type usr/bin/activate
+
+the server will load and you can use port 5000 to access the application
+i.e http://localhost:5000/
+
+also create a database with name 'elibrary'
+
+ADMIN USER:
+email: admin@admin.com
+password: admin
+
+NOTE: please forgive the work, I heard an emergency and I only had Friday to work. Is will do betterif given another chance
+

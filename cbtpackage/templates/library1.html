@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>SB Admin - Blank Page</title>
+
+  <!-- Custom fonts for this template-->
+  <link href="{{ url_for('static', filename='vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+
+  <!-- Page level plugin CSS-->
+  <link href="{{ url_for('static', filename='vendor/datatables/dataTables.bootstrap4.css') }}" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="{{ url_for('static', filename='css/sb-admin.css') }}" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+
+    <a class="navbar-brand mr-1" href="">Welcome, {{ uname}}</a>
+
+    <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Navbar Search -->
+    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+      
+    </form>
+
+    <!-- Navbar -->
+    <ul class="navbar-nav ml-auto ml-md-0">
+      
+      <li class="nav-item dropdown no-arrow">
+        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-user-circle fa-fw"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
+        </div>
+      </li>
+    </ul>
+
+  </nav>
+
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="sidebar navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>E-library</span>
+        </a>
+      </li>
+      
+    </ul>
+
+    <div id="content-wrapper">
+
+      <div class="container-fluid">
+
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="">Library</a>
+          </li>
+          <li class="breadcrumb-item active">Library List</li>
+        </ol>
+
+        <!-- Page Content -->
+
+        <div class="row">
+            <div class="col-md-2">
+
+              
+            </div>
+
+            <div class="col-md-2 offset-md-8">
+
+              <button class="btn btn-info btn-sm mb-1" data-toggle="modal" data-target="#teach"><i class="fas fa-plus">  </i>  Add Book</button>
+              
+            </div>
+            
+          </div>
+        
+        <hr>
+        <!-- DataTables Example -->
+        <div class="card mb-3">
+            <div class="card-header">
+              <i class="fas fa-table"></i>
+              E-Books</div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                        <th>
+                            Book Title
+                          </th>
+                          <th>
+                            Book Author
+                          </th>
+                          <th>
+                            Book State
+                          </th>
+                          <th>
+                            Operations
+                          </th>
+                      
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                        <th>
+                            Book Title
+                          </th>
+                          <th>
+                            Book Author
+                          </th>
+                          <th>
+                            Book State
+                          </th>
+                          <th>
+                            Operations
+                          </th>
+                    </tr>
+                  </tfoot>
+                  <tbody>
+                  {% if query: %}
+                    {% for i in query: %}
+                    <tr>
+                      <td>{{ i.book_title }}</td>
+                      <td>{{ i.book_author }}</td>
+                      <td>{{ i.book_status }}</td>
+                      <td>
+                          <a href="{{ url_for('downloads', filename=i.book_file) }}" class="btn btn-primary btn-sm">Download</a>
+                          <a href="{{ url_for('updatelibrary', id_=i.id) }}" class="btn btn-primary btn-sm">Edit</a>
+                          <a href="{{ url_for('deletelibrary', lib_id=i.id) }}" class="btn btn-danger btn-sm">Delete</a>
+                      </td>
+                    </tr>
+                  {% endfor %}
+                  {% endif %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            
+          </div>
+  
+          
+
+        
+
+       
+
+      </div>
+      <!-- /.container-fluid -->
+
+      <!-- Sticky Footer -->
+      <footer class="sticky-footer">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright © Your Website 2019</span>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+    <!-- /.content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="{{ url_for('logout')}}">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="teach" tabindex="-1" role="dialog" aria-labelledby="teach" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header bg-primary text-light">
+            <h5 class="modal-title" id="teach">Add Book</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+           
+             <form action="{{ url_for('library') }}" id="form" method="POST" class="form-vertical" style="color:black;" enctype="multipart/form-data">
+            <div class="row bordDes form-group">
+                    <div class="col-md-2 offset-md-1">
+  
+                {{ form2.book_title.label }}
+                
+              </div>
+                  
+                    <div class="col-md-6">
+                      {{ form2.book_title(class_="form-control") }}
+                    </div>
+  
+                  </div>
+  
+                  <div class="row bordDes form-group">
+  
+                    <div class="col-md-2 offset-md-1">
+  
+                        {{ form2.book_description.label }}
+                      
+                    </div>
+                  
+                    <div class="col-md-6">
+                        {{ form2.book_description(class_="form-control") }}
+                    </div>
+  
+                  </div>
+  
+                  <div class="row bordDes form-group">
+  
+                    <div class="col-md-2 offset-md-1">
+  
+                        {{ form2.book_author.label }}
+                      
+                    </div>
+                  
+                    <div class="col-md-6">
+                        {{ form2.book_author(class_="form-control") }}
+                    </div>
+  
+                  </div>
+  
+                  <div class="row bordDes form-group">
+                    <div class="col-md-2 offset-md-1">
+  
+                      <label>Book File:</label>
+                      
+                    </div>
+                  
+                    <div class="col-md-6">
+                      <input type="file" id="book_file" name="book_file" onchange="fileError();"><br>
+                      <span style="color:red;" id="errorfile"></span>
+  
+                    </div>
+  
+                  </div>
+  
+                  <div class="row bordDes form-group">
+                    <div class="col-md-2 offset-md-1">
+  
+                        {{ form2.status.label }}
+                      
+                    </div>
+                  
+                    <div class="col-md-6">
+                        {{ form2.status(class_="form-control") }}
+                    </div>
+  
+                  </div>
+  
+                  
+  
+                  <div class="row bordDes form-group">
+                    <div class="col-md-2 offset-md-1">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" id="csrf_token"
+                    </div>
+                  
+                    <div class="col-md-6">
+                        {{ form2.submit }}
+                    </div>
+  
+                  </div>
+  
+                
+          </form>
+          
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="{{ url_for('static', filename='vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+
+  <!-- Page level plugin JavaScript-->
+  <script src="{{ url_for('static', filename='vendor/datatables/jquery.dataTables.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/datatables/dataTables.bootstrap4.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/demo/datatables-demo.js') }}"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="{{ url_for('static', filename='js/sb-admin.min.js') }}"></script>
+  <script>
+
+			function fileError(){
+				// fdatas = $('#form').serialize();
+				fdatas = new FormData();
+				files= $('#book_file')[0].files[0];
+				fdatas.append('file', files);
+				fdatas.append('csrf_token', '{{ csrf_token() }}');
+				// fdata = $('#book_file').val();
+				// urldata= "textstr="+fdatas;
+				
+				$.ajax({
+					url:'/admin/confirmbookfiletype',
+					data:fdatas,
+					type:'POST',
+					dataType:'text',
+					contentType:false,
+					processData:false,
+					success:function(tt){
+					if (tt == 'typebad'){
+						$('#errorfile').html('');
+						$('#errorfile').html("Incorrect file type, must be pdf");
+						$("#book_file").val('');
+					}
+					else if (tt == 'sizebad'){
+						$('#errorfile').html('');
+						$('#errorfile').html("file must be 2mb or less");
+						$("#book_file").val('');
+					}
+					else{
+						$('#errorfile').html('');
+						$('#submit').removeAttr('disabled', 'disabled');
+					}
+					},
+					error:function(anye){	
+					console.log(anye);
+							
+					}
+				});
+				}
+
+</script>
+<script>
+		$(document).ready(function(){
+			$('#submit').attr('disabled', 'disabled');
+		})
+	</script>
+  
+
+</body>
+
+</html>
